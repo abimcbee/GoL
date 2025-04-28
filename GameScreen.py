@@ -5,16 +5,7 @@ from GridRenderer import GridRenderer
 from GameLogic import GameLogic
 from tkinter import messagebox
 import tkinter.simpledialog
-import os
-import sys
-
-
-def get_path(filename):
-    if getattr(sys, 'frozen', False):
-        base_path = sys._MEIPASS
-    else:
-        base_path = os.path.dirname(__file__)
-    return os.path.join(base_path, filename)
+import AppManager
 
 
 class GameScreen(Screen):
@@ -344,7 +335,7 @@ class GameScreen(Screen):
         """
         # Load existing saved grids if the file exists
         try:
-            with open(get_path(filename)) as file:
+            with open(AppManager.get_path(filename)) as file:
                 saved_grids = json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             saved_grids = []
@@ -374,7 +365,7 @@ class GameScreen(Screen):
             saved_grids[slot] = self.initial_grid
 
         # Save the grids to the file
-        with open(filename, "w") as file:
+        with open(AppManager.get_path(filename), "w") as file:
             json.dump(saved_grids, file, indent=4)
 
         # Show a message to confirm the grid has been saved

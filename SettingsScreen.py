@@ -2,16 +2,7 @@ import tkinter as tk
 from Screen import Screen
 import json
 from tkinter import messagebox
-import os
-import sys
-
-
-def get_path(filename):
-    if getattr(sys, 'frozen', False):
-        base_path = sys._MEIPASS
-    else:
-        base_path = os.path.dirname(__file__)
-    return os.path.join(base_path, filename)
+import AppManager
 
 
 class SettingsScreen(Screen):
@@ -174,7 +165,7 @@ class SettingsScreen(Screen):
             index (int): The index of the saved grid to load.
         """
         try:
-            with open(get_path("saved_grids.json")) as file:
+            with open(AppManager.get_path("saved_grids.json")) as file:
                 saved_grids = json.load(file)
             if index < len(saved_grids):
                 saved_grid = saved_grids[index]
@@ -198,7 +189,7 @@ class SettingsScreen(Screen):
             index (int): The index of the saved grid to delete.
         """
         try:
-            with open("saved_grids.json", "r") as file:
+            with open(AppManager.get_path("saved_grids.json"), "r") as file:
                 saved_grids = json.load(file)
             if index < len(saved_grids):
                 if not saved_grids[index]:

@@ -1,16 +1,7 @@
 import tkinter as tk
 from Screen import Screen
 from PIL import Image, ImageTk
-import sys
-import os
-
-
-def get_path(filename):
-    if getattr(sys, 'frozen', False):  # If running from PyInstaller bundle
-        base_path = sys._MEIPASS
-    else:  # Running in IDE or script
-        base_path = os.path.dirname(__file__)
-    return os.path.join(base_path, filename)
+import AppManager
 
 
 class HomeScreen(Screen):
@@ -38,7 +29,7 @@ class HomeScreen(Screen):
         self.canvas.pack(expand=True, fill="both")
 
         # load the image for background
-        self.original_image = Image.open(get_path("home-screen.jpg"))
+        self.original_image = Image.open(AppManager.get_path("home-screen.jpg"))
         self.background_image = ImageTk.PhotoImage(self.original_image)
 
         # display the background image
