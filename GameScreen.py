@@ -213,11 +213,13 @@ class GameScreen(Screen):
         col = (event.x - self.grid_renderer.x_offset) // self.grid_manager.cell_size
         row = (event.y - self.grid_renderer.y_offset) // self.grid_manager.cell_size
 
-        # toggle the cell state
-        if self.grid_manager.grid[row][col] == 1:
-            self.grid_manager.grid[row][col] = 0
-        else:
-            self.grid_manager.grid[row][col] = 1
+        # check if the row and column are within the grid bounds
+        if 0 <= row < self.grid_manager.rows and 0 <= col < self.grid_manager.cols:
+            # toggle the cell state
+            if self.grid_manager.grid[row][col] == 1:
+                self.grid_manager.grid[row][col] = 0
+            else:
+                self.grid_manager.grid[row][col] = 1
 
         # update the initial grid to reflect changes
         self.initial_grid = [row[:] for row in self.grid_manager.grid]
