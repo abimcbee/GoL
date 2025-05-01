@@ -8,12 +8,13 @@ import os
 import sys
 
 
+# used for packaging with pyinstaller
 def get_path(filename):
-    if getattr(sys, 'frozen', False):
-        base_path = sys._MEIPASS
+    if getattr(sys, 'frozen', False):  # Check if the application is frozen (packaged)
+        base_path = sys._MEIPASS  # Get the base path of the frozen application
     else:
-        base_path = os.path.dirname(__file__)
-    return os.path.join(base_path, filename)
+        base_path = os.path.dirname(__file__)  # Get the directory of the script
+    return os.path.join(base_path, filename)  # Join the base path with the filename
 
 
 class AppManager:
